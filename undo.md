@@ -67,7 +67,7 @@ Files changed are not in staging area, but **it's in working directory**
 
 ### `git reset --hard hash`
 All of our tracked files match the state that they were in at the hash we specified. This gets rid of your changes.
-It reverts all of the tracked files back to the state they were, but it leaves any untracked files alone
+It reverts all of the tracked files back to the state they were, but it **leaves any untracked files alone**.
  ```bash
  $ git reset --hard hash
  ```
