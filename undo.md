@@ -42,27 +42,65 @@ Use `git rest` to undo commits made. There are three types of reset
  $ git reset --hard 
  ```
 ### How to select commit hash code
-If you want to go back to commit C, then use commit hash of B
+If you want to go back to commit 3, then use commit hash of 3
 
+Number indicates data inside file a
  ```
  # git log
  
- │   commit A
- │   commit B
- │   commit C
- │   commit D
+ │   commit file a  -> 6
+ │   commit file a  -> 5
+ │   commit file a  -> 4
+ │   commit file a  -> 3
+ │   commit file a  -> 2
+ │   commit file a  -> 1
  ```
 
 ### `git reset --soft hash`
 Soft resets us back to the commit we specified, but **it keeps our changes that we made wihin staging area.** 
  ```bash
  $ git reset --soft hash
+
+ # ex)
+ $ git reset --soft 4
+
+
+  # git log
+ │   commit file a  -> 4
+ │   commit file a  -> 3
+ │   commit file a  -> 2
+ │   commit file a  -> 1
+
+ $ git status
+ Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   a
+
+   a -> 6
  ```
 
 ### `git reset --mixed hash`
 Files changed are not in staging area, but **it's in working directory**
  ```bash
  $ git reset hash
+
+# ex)
+$ git reset 4
+
+  # git log
+ │   commit file a  -> 4
+ │   commit file a  -> 3
+ │   commit file a  -> 2
+ │   commit file a  -> 1
+
+ $ git status
+ Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   a
+   a -> 6
+
+
  ```
 
 ### `git reset --hard hash`
@@ -70,6 +108,20 @@ All of our tracked files match the state that they were in at the hash we specif
 It reverts all of the tracked files back to the state they were, but it **leaves any untracked files alone**.
  ```bash
  $ git reset --hard hash
+
+# ex)
+$ git reset --hard 4
+
+   # git log
+ │   commit file a  -> 4
+ │   commit file a  -> 3
+ │   commit file a  -> 2
+ │   commit file a  -> 1
+
+ $ git status
+ nothing to commit, working tree clean
+
+ a -> 4
  ```
 
 ### To get rid of untracked file
